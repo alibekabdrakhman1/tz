@@ -19,7 +19,7 @@ function App() {
   return (
     <div onKeyUp={handleKeyDown}>
       <button onClick={clear}>Clear</button>
-      <BinarySearchTree data={[]} ref={ref} />
+      <BinarySearchTree data={[10, 20]} ref={ref} />
     </div>
   );
 }

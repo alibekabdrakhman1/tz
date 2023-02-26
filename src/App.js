@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { BinarySearchTree, useAVLTree, useTrie } from "react-tree-vis";
 
 function App() {
+  const { ref, insert, clear } = useAVLTree();
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+  const handleKeyDown = (event) => {
+    if (event.code === "Space") {
+      const randomValue = Math.floor(Math.random() * 201) - 100;
+      insert(randomValue);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div onKeyUp={handleKeyDown}>
+      <button onClick={clear}>Clear</button>
+      <BinarySearchTree data={[]} ref={ref} />
     </div>
   );
 }

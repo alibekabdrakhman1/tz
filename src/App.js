@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree, useAVLTree, useTrie } from "react-tree-vis";
 
 function App() {
   const { ref, insert, clear } = useAVLTree();
-  function insertToTree(v) {
-    console.log(1213);
-    insert(v);
-  }
+  const [insertValue, setInsertValue] = useState(0);
+  const ref1 = useRef(null);
+
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    ref1.current.focus();
   }, []);
-  const handleKeyDown = (event) => {
-    if (event.code === "Space") {
-      insertToTree(Math.floor(Math.random() * 201) - 100);
-    }
-  };
-
   return (
-    <div onKeyUp={handleKeyDown}>
+    <div
+      ref={ref1}
+      onKeyDown={(event) => {
+        setInsertValue(Math.floor(Math.random() * 201) - 100);
+        if (event.code === "Space") {
+          insert(insertValue);
+        }
+      }}
+      tabIndex={0}
+    >
       <button onClick={clear}>Clear</button>
-      <BinarySearchTree data={[10, 20]} ref={ref} />
+      <div>
+        <BinarySearchTree data={[10, 20]} ref={ref} />
+      </div>
     </div>
   );
 }

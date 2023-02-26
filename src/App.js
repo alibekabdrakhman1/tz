@@ -12,8 +12,7 @@ function App() {
   }, []);
   const handleKeyDown = (event) => {
     if (event.code === "Space") {
-      const randomValue = Math.floor(Math.random() * 201) - 100;
-      insert(randomValue);
+      insert(Math.floor(Math.random() * 201) - 100);
     }
   };
 

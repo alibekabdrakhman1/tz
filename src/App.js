@@ -3,6 +3,10 @@ import { BinarySearchTree, useAVLTree, useTrie } from "react-tree-vis";
 
 function App() {
   const { ref, insert, clear } = useAVLTree();
+  function insertToTree(v) {
+    console.log(1213);
+    insert(v);
+  }
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -12,7 +16,7 @@ function App() {
   }, []);
   const handleKeyDown = (event) => {
     if (event.code === "Space") {
-      insert(Math.floor(Math.random() * 201) - 100);
+      insertToTree(Math.floor(Math.random() * 201) - 100);
     }
   };
 
